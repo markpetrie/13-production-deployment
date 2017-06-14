@@ -2,7 +2,7 @@
 
 //TODO include our new npm module that reads our .env file when running our server locally
 
-
+const dotenv = require('dotenv').config();
 const pg = require('pg');
 const fs = require('fs');
 const express = require('express');
@@ -11,7 +11,7 @@ const requestProxy = require('express-request-proxy'); // REVIEW: We've added a 
 const PORT = process.env.PORT || 3000;
 const app = express();
 // const conString = 'postgres://USERNAME:PASSWORD@HOST:PORT';
-const conString = ''; // TODO: now that we are using environment variables, move our conString to our .env file
+const conString = process.env.DATABASE_URL; // DONE: now that we are using environment variables, move our conString to our .env file
 const client = new pg.Client(conString);
 client.connect();
 client.on('error', err => console.error(err));
